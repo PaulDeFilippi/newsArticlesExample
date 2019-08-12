@@ -90,8 +90,10 @@ class NewsTableViewController: UITableViewController {
         
         let detailVC = NewsDetailViewController(nibName: "NewsDetailViewController", bundle: nil)
         
-        detailVC.title = titles[indexPath.row]
-        detailVC.author = authors[indexPath.row]
+//        detailVC.title = titles[indexPath.row]
+//        detailVC.author = authors[indexPath.row]
+        
+        detailVC.article = articles[indexPath.row]
         
         
         navigationController?.pushViewController(detailVC, animated: true)
