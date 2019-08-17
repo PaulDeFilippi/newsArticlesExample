@@ -47,13 +47,6 @@ class API {
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         
-//        do {
-//            let realm = try Realm()
-//            realm.beginWrite()
-//        } catch let error {
-//            print("Error initializing Realm: \(error)")
-//        }
-        
         let realm = try! Realm()
         realm.beginWrite()
         

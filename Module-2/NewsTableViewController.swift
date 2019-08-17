@@ -10,8 +10,7 @@ import UIKit
 import RealmSwift
 
 class NewsTableViewController: UITableViewController {
-    
-    //var articles: [Article] = [Article]()
+
     var articles: Results<Article> {
         get {
             let realm = try! Realm()
@@ -19,25 +18,6 @@ class NewsTableViewController: UITableViewController {
             return realm.objects(Article.self)
         }
     }
-    
-    var titles: [String] = [
-        "New York Yankess win again!",
-        "Welcome to the Thunderdome",
-        "The new Apple iWatch is amazing!",
-        "Scientists dicover 20,000 year old Wooly Mammoth",
-        "Today at Wimbleton",
-        "Exclusive new diet pill!",
-        ""
-    ]
-
-    var authors: [String] = [
-        "Mary",
-        "Thomas",
-        "Bill",
-        "Paul",
-        "Alice",
-        "Tom"
-    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,22 +29,6 @@ class NewsTableViewController: UITableViewController {
     }
     
     @objc func onArticlesReceived(notification: Notification) {
-//        if let articles: [Article] = notification.object as? [Article] {
-//            print("All Articles: \(articles)")
-//
-//            self.articles = articles
-//            self.tableView.reloadData()
-//
-//
-//        }
-        
-//        let sortedArticles = articles.sorted { (article1, article2) -> Bool in
-//            return article1 < article2
-//        }
-        
-//        let sortedArticels = articles.sorted { (a: Article, b: Article) -> Bool in
-//            return a < b
-//        }
         
         self.tableView.reloadData()
     }
@@ -78,7 +42,6 @@ class NewsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        //return titles.count - 1
         return articles.count
     }
 
@@ -93,9 +56,6 @@ class NewsTableViewController: UITableViewController {
             cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cellIdentifier")
         }
         
-//        cell!.textLabel?.text = titles[indexPath.row]
-//        cell!.detailTextLabel?.text = authors[indexPath.row]
-        
         let article = articles[indexPath.row]
         
         cell!.textLabel?.text = article.title
@@ -108,11 +68,7 @@ class NewsTableViewController: UITableViewController {
         
         let detailVC = NewsDetailViewController(nibName: "NewsDetailViewController", bundle: nil)
         
-//        detailVC.title = titles[indexPath.row]
-//        detailVC.author = authors[indexPath.row]
-        
         detailVC.article = articles[indexPath.row]
-        
         
         navigationController?.pushViewController(detailVC, animated: true)
     }

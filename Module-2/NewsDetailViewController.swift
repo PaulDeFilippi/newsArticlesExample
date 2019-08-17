@@ -47,14 +47,6 @@ class NewsDetailViewController: UIViewController, WKNavigationDelegate {
             </html>
             """, baseURL: nil)
         
-        //webView?.loadHTMLString(article!.content, baseURL: nil)
-        
-//        titleLabel?.text = self.title
-//        authorLabel?.text = self.article?.author
-        
-//        let request = URLRequest(url: URL(string: "https://learnappmaking.com/lipsum.html")!)
-//        webView?.load(request)
-        
         imageView?.image = nil
         
         if let thumbnailURL = URL(string:article!.thumbnailURL) {

@@ -23,9 +23,4 @@ class Article: Object {
     override static func primaryKey() -> String? {
         return "id"
     }
-    
-//    var description: String {
-//        return "Article: \(self.creationDate) -- \(self.title) -- \(self.articleURL)"
-//    }
-    
 }
