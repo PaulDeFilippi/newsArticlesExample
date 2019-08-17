@@ -7,19 +7,25 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Article: CustomStringConvertible {
+class Article: Object {
 
-    var id: Int = 0
-    var title: String = ""
-    var author: String = ""
-    var content: String = ""
-    var thumbnailURL: String = ""
-    var articleURL: String = ""
-    var excerpt: String = ""
-    var creationDate: Date = Date()
+    @objc dynamic var id: Int = 0
+    @objc dynamic var title: String = ""
+    @objc dynamic var author: String = ""
+    @objc dynamic var content: String = ""
+    @objc dynamic var thumbnailURL: String = ""
+    @objc dynamic var articleURL: String = ""
+    @objc dynamic var excerpt: String = ""
+    @objc dynamic var creationDate: Date = Date()
     
-    var description: String {
-        return "Article: \(self.creationDate) -- \(self.title) -- \(self.articleURL)"
+    override static func primaryKey() -> String? {
+        return "id"
     }
+    
+//    var description: String {
+//        return "Article: \(self.creationDate) -- \(self.title) -- \(self.articleURL)"
+//    }
+    
 }

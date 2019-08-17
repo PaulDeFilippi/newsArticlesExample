@@ -5,4 +5,5 @@ use_frameworks!
 target "Module-2" do
 pod 'Alamofire', '4.8.2'
 pod 'SwiftyJSON', '4.2.0'
+pod 'RealmSwift', '3.14.0'
 end

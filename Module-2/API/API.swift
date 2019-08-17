@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 private let _API_SharedInstance = API()
 
@@ -46,7 +47,16 @@ class API {
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         
-        var articles: [Article] = [Article]()
+//        do {
+//            let realm = try Realm()
+//            realm.beginWrite()
+//        } catch let error {
+//            print("Error initializing Realm: \(error)")
+//        }
+        
+        let realm = try! Realm()
+        realm.beginWrite()
+        
         // _ is representing the 'key' but was never mutated
         for (_, item):(String, JSON) in json {
             let article = Article()
@@ -79,20 +89,22 @@ class API {
                 article.thumbnailURL = thumbnailURL
             }
             
-            if  let dateString = item["date"].string,
-                let creationDate = dateFormatter.date(from: dateString)
-            {
+            if  let dateString = item["date"].string, let creationDate = dateFormatter.date(from: dateString) {
                 article.creationDate = creationDate
             }
             
-            articles += [article]
+            realm.add(article, update: true)
             
         }
         
-        if articles.count > 0 {
-            NotificationCenter.default.post(name: API.articlesReceivedNotification, object: articles)
+        do {
+            try realm.commitWrite()
+            print("Commiting write...")
+        } catch let e {
+            print("Y U NO REALM ?\(e)")
         }
         
-        print(articles)
+        NotificationCenter.default.post(name: API.articlesReceivedNotification, object: nil)
+
     }
 }
