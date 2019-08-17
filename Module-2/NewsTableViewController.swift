@@ -7,10 +7,18 @@
 //
 
 import UIKit
+import RealmSwift
 
 class NewsTableViewController: UITableViewController {
     
-    var articles: [Article] = [Article]()
+    //var articles: [Article] = [Article]()
+    var articles: Results<Article> {
+        get {
+            let realm = try! Realm()
+            
+            return realm.objects(Article.self)
+        }
+    }
     
     var titles: [String] = [
         "New York Yankess win again!",
@@ -41,14 +49,24 @@ class NewsTableViewController: UITableViewController {
     }
     
     @objc func onArticlesReceived(notification: Notification) {
-        if let articles: [Article] = notification.object as? [Article] {
-            print("All Articles: \(articles)")
-            
-            self.articles = articles
-            self.tableView.reloadData()
-            
-            
-        }
+//        if let articles: [Article] = notification.object as? [Article] {
+//            print("All Articles: \(articles)")
+//
+//            self.articles = articles
+//            self.tableView.reloadData()
+//
+//
+//        }
+        
+//        let sortedArticles = articles.sorted { (article1, article2) -> Bool in
+//            return article1 < article2
+//        }
+        
+//        let sortedArticels = articles.sorted { (a: Article, b: Article) -> Bool in
+//            return a < b
+//        }
+        
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
